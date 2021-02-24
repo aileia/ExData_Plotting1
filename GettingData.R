@@ -1,0 +1,10 @@
+library(tidyr)
+library(magrittr)
+library(dplyr)
+library(lubridate)
+fileurl="https://d396qusza40orc.cloudfront.net/exdata%2Fdata%2Fhousehold_power_consumption.zip"
+download.file(fileurl,'./household.zip', mode = 'wb')
+unzip("household.zip", exdir = getwd())
+data <- read.table("household_power_consumption.txt", sep=";", header = TRUE)
+data$Date<-dmy(data$Date)
+data<-data%>%filter(Date=="2007-02-01"|Date=="2007-02-02")
